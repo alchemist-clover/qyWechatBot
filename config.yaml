@@ -1,0 +1,40 @@
+#---------------------企业微信应用相关配置-------------------
+corpId: #企业id
+agentId: #应用id
+secret: #应用secret
+cryptToken: 
+cryptKey: 
+departmentId: #需要机器人服务的部门id
+
+
+#---------------------微博账号相关配置----------------------
+weiboHeaderUA: 
+weiboHeaderCookie: 
+
+
+#---------------------机器人基础配置------------------------
+maxTryCount: 3 #网络连接故障或API系统繁忙时的单次最大重试次数
+maxPendingMessages: 50
+utc: 8 #机器人所在地的utc时区
+botListenPort: 8080 #机器人监听的端口号
+dataBaseDir: data #数据库文件保存的目录
+jobTableNames:
+  - static
+  - custom
+  - temporary
+cacheTableName: cache
+
+#--------------------日志系统基础配置-----------------------
+logEnable: true #是否启用日志系统
+logFilesDir:
+logLevel: debug
+logFormat: "%(color)s[%(levelname)1.4s]%(end_color)s [%(asctime)s %(filename)s:%(funcName)s]: %(color)s%(message)s%(end_color)s"
+logDateFormat: "%y-%m-%d %H:%M:%S"
+logBackupCount: 30
+logRotateMode: time
+#-----------------logRotateMode为time的配置---------------
+logWhen: midnight
+logUtc: 8
+logInterval: 1
+#-----------------logRotateMode为size的配置---------------
+logMaxBytes: 1048576
