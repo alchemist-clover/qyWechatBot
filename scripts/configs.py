@@ -29,9 +29,9 @@ weiboHeaders = {
     "Sec-Fetch-Site": "same-origin",
     "Sec-Fetch-Mode": "cors",
     "Sec-Fetch-Dest": "empty",
-    "Referer": "https://m.weibo.cn/message/chat?uid=5175429989",
+    "Referer": "https://m.weibo.cn/message/chat?uid=5175429989&name=msgbox",
     "Accept-Encoding": "gzip, deflate",
-    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-US;q=0.7",
     "Cookie": config["weiboHeaderCookie"]
 }
 globalState = {

@@ -22,7 +22,9 @@ def countConnection(func):
     return wrapper
 
 
-class __callbackHandler(web.RequestHandler):
+class callbackHandler(web.RequestHandler):
+    __ioLoop = ioloop.IOLoop.current()
+
     @countConnection
     def get(self):
         msgSignature = self.get_query_argument("msg_signature", None)
@@ -50,10 +52,10 @@ class __callbackHandler(web.RequestHandler):
             messageType = xmlTree.find("MsgType").text
             generalLogger.info("Message parsed successfully!")
             if messageType == "text":
-                __ioLoop.add_callback(
+                callbackHandler.__ioLoop.add_callback(
                     chat, fromId, content=xmlTree.find("Content").text)
             else:
-                __ioLoop.add_callback(
+                callbackHandler.__ioLoop.add_callback(
                     sendWechatMessage, content="暂不支持非文本类消息哦~", touser=fromId)
         else:
             generalLogger.debug("Input error, ignore this request.")
@@ -61,6 +63,5 @@ class __callbackHandler(web.RequestHandler):
 
 
 connectionCount = 0
-__ioLoop = ioloop.IOLoop.current()
-__application = web.Application([(r"/callback", __callbackHandler)])
+__application = web.Application([(r"/callback", callbackHandler)])
 httpServer = httpserver.HTTPServer(__application)
