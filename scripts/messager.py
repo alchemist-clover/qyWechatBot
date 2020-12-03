@@ -13,7 +13,9 @@ def urljoin(base, *options):
     return "/".join((base,) + options)
 
 
-async def chat(fromId, token=getValue("weiboToken"), messageType="text", **args):
+async def chat(fromId, token=None, messageType="text", **args):
+    if token is None:
+        token = getValue("weiboToken")
     postDict = __getWeiboPostDict(messageType, **args)
     async with __chatLock:
         sendTimestamp = datetime.utcnow().timestamp()
@@ -32,7 +34,9 @@ async def chat(fromId, token=getValue("weiboToken"), messageType="text", **args)
         "Send {} message(s) successfully!".format(len(responseMessages)))
 
 
-async def sendWechatMessage(token=getValue("wechatToken"), messageType="text", tokenInvalidSaved=False, **args):
+async def sendWechatMessage(token=None, messageType="text", tokenInvalidSaved=False, **args):
+    if token is None:
+        token = getValue("wechatToken")
     if not (tokenInvalidSaved or getValue("wechatTokenAvailable")):
         generalLogger.info(
             "WechatToken cannot be gotten and tokenInvalidSaved is false, so ignoring this wechat message.")
